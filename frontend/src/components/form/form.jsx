@@ -2,20 +2,28 @@ import { useState, useRef } from "react";
 import FormSelect from "../form-select/form-select";
 import { BiCopy } from "react-icons/bi";
 
-const Form = ({ state, setList, setIsShowForm }) => {
+import { proxy } from "../../api/proxy";
+import { urls } from "../../api/urls";
+
+const Form = ({ state, list, setList, setIsShowForm }) => {
   const copyBtnRef = useRef(null);
   const [valletAdress, setValletAdress] = useState("");
   const [networkTransMission, setNetworkTransMission] = useState("");
 
   const networks = [
-    "ERC20",
-    "TRC20",
+    "BEP2",
+    "BEP20",
     "BTC",
-    "wefwe",
-    "few",
-    "rgrg",
-    ",wef",
-    "3434",
+    "BCH",
+    "DASH",
+    "DOGE",
+    "ERC20",
+    "LTC",
+    "TRC20",
+    "XRP",
+    "TERRA",
+    "ONE",
+    "SOLANA",
   ];
 
   const effect = {
@@ -25,12 +33,32 @@ const Form = ({ state, setList, setIsShowForm }) => {
 
   const submitHandle = (e) => {
     e.preventDefault();
+    const isExistAddress = list.some((item) => item.address === valletAdress);
+    if (!valletAdress) return alert("ادرس خالی است!!");
+    if (isExistAddress) return alert("ادرس ولت موجود میباشد");
 
-    if(!valletAdress) return alert('ادرس خالی است!!')
-    setList((list) => {
-      return [...list, { address: valletAdress, type: networkTransMission }];
+    const url = urls.getUrl(networkTransMission, valletAdress);
+    list.map((item) => console.log(item));
+    proxy.get(url).then((vallet) => {
+      if (!vallet || vallet.context || vallet.message) {
+        alert("سمت سرور مشکل نامشخص");
+        console.log("result from server", vallet);
+       
+      } else {
+        setList((list) => {
+          return [
+            ...list,
+            {
+              ...vallet,
+              address: valletAdress,
+              networkType: networkTransMission,
+            },
+          ];
+        });
+      }
     });
-    setIsShowForm(false)
+
+    setIsShowForm(false);
   };
 
   const [copy, setCopy] = useState(<BiCopy />);

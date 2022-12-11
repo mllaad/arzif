@@ -6,7 +6,7 @@ const FormSelect = ({
   networkTransMission,
   setNetworkTransMission,
 }) => {
-  console.log(options)
+
   const [selectedOption, setSelectedOption] = useState(options[0]);
   useEffect(() => {
     setNetworkTransMission(options[0])

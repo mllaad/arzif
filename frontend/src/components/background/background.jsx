@@ -16,12 +16,12 @@ const Background = ({ state, isEpmty, children }) => {
         }`}
       ></div>
       <div
-        className="relative  transition-all duration-1000 "
+        className="relative w-full  transition-all duration-1000 "
         style={effect[state]}
       >
         <h1 className="text-center py-3 bg-white h-[8vh] "> ارزیف واچ</h1>
         {isEpmty ? (
-          <div className="h-[92vh]   bg-slate-200  flex px-5 py-5 relative overflow-scroll">
+          <div className="h-[92vh]  bg-slate-200  flex px-5 py-5 relative overflow-scroll">
             {children}
           </div>
         ) : (

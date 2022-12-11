@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import Background from "./components/background/background";
 import Form from "./components/form/form";
@@ -14,10 +14,9 @@ function App() {
   const [isShowForm, setIsShowForm] = useState(false);
   const [list, setList] = useState([]);
   // custom
-
+  console.log(list)
   const isEpmty = list.length ? true : false;
- 
- 
+
   const container =
     "h-screen w-[400px] m-auto relative  overflow-hidden transition-all duration-500";
   return (
@@ -31,7 +30,12 @@ function App() {
             setList={setList}
           />
         </Background>
-        <Form state={isShowForm} setList={setList} setIsShowForm={setIsShowForm}/>
+        <Form
+          state={isShowForm}
+          list={list}
+          setList={setList}
+          setIsShowForm={setIsShowForm}
+        />
         <PageBtn isShowForm={isShowForm} setIsShowForm={setIsShowForm} />
       </div>
       {/* // modal */}
