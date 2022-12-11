@@ -40,7 +40,7 @@ const Form = ({ state, list, setList, setIsShowForm }) => {
     const url = urls.getUrl(networkTransMission, valletAdress);
     list.map((item) => console.log(item));
     proxy.get(url).then((vallet) => {
-      if (!vallet || vallet.context || vallet.message) {
+      if (!vallet || vallet.context || vallet.message || vallet.error) {
         alert("سمت سرور مشکل نامشخص");
         console.log("result from server", vallet);
        

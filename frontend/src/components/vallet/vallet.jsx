@@ -9,7 +9,7 @@ const Vallet = ({ cantainer, editBtn, list, setList }) => {
         const address = item.address;
         const balance = item.Balance || item.balance;
         const balances = item.balances || [balance];
-
+        console.log(balance)
         const clickHandle = (event) => {
           const { x, y, right } = event.currentTarget.getBoundingClientRect();
 
@@ -75,6 +75,7 @@ const Vallet = ({ cantainer, editBtn, list, setList }) => {
             </div>
             <div className="flex flex-wrap pt-7">
               {balances.map((item, i) => {
+                console.log(item)
                 if (i > 10) return;
                 return (
                   <div key={i} className="w-1/2 text-center flex text-sm">
